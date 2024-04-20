@@ -69,7 +69,7 @@ class Book
         {
             isCheckedOut = true;
             checkedOutTo = name;
-            System.out.println("Book checked out to " + name);
+            System.out.println("This book is now checked out to " + name + ".");
 
         }
 
@@ -86,7 +86,7 @@ class Book
         {
             isCheckedOut = false;
             checkedOutTo = "";
-            System.out.println("Book checked in successfully.");
+            System.out.println("The book has been successfully checked in!");
         }
 
         else
