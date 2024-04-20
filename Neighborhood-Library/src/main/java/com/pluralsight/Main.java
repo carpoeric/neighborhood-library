@@ -10,6 +10,32 @@ public class Main
     static final Book[] books = new Book[MAX_BOOKS];
 
 
+    public static void displayMainMenu() {
+        String[] menuOptions = {
+                "1 - Show Available Books",
+                "2 - Show Checked Out Books",
+                "3 - Exit (Close App)"
+        };
+
+        int maxLength = 0;
+        for (String option : menuOptions) {
+            if (option.length() > maxLength) {
+                maxLength = option.length();
+            }
+        }
+        int boxWidth = maxLength +4; // Adding 4 for padding and borders
+        String horizontalLine = "+" + "-".repeat(boxWidth) + "+";
+
+        System.out.println(horizontalLine);
+        for (String option : menuOptions) {
+            String paddedOption = "| " + option + " ".repeat(boxWidth - option.length() - 3) + "|";
+            System.out.println(paddedOption);
+        }
+        System.out.println(horizontalLine);
+    }
+
+
+
     public static void main(String[] args)
     {
         // Array
@@ -18,20 +44,14 @@ public class Main
         int choice = 0;
         while (choice != 3)
         {
-            //Home Screen Print
+            // Print home
             System.out.println();
-            System.out.println("Welcome to your Neighborhood Library!");
-            System.out.println("------------------------------");
-            System.out.println("1 - Show Available Books");
-            System.out.println("2 - Show Checked Out Books");
-            System.out.println("3 - Exit (Close App)");
-            System.out.println("------------------------------");
-            System.out.println();
-            System.out.println("To select an action, please enter it's corresponding number here: ");
+            System.out.println("Welcome to your Neighborhood Library!");;
+            displayMainMenu();
+            System.out.println("Enter your command command here: ");
             choice = Integer.parseInt(userInput.nextLine());
 
-            switch (choice)
-            {
+            switch (choice) {
                 case 1:
                     showAvailableBooks(books);
                     break;
@@ -94,6 +114,7 @@ public class Main
 
         if (userChoice == 0)
         {
+            System.out.println("Redirecting you back to the home page now...");
             return;
         }
         else if (userChoice >= 1 && userChoice <= bookCount)
@@ -143,7 +164,9 @@ public class Main
                 checkInBook();
                 break;
             case "X":
-                return; // Go back home
+                System.out.println("Redirecting you back to the home page now...");
+                return;
+                // Go back home
             default:
                 System.out.println("Invalid selection. Please enter C to check in a book, or X to go back to the home screen.");
                 break;
