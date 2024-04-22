@@ -22,17 +22,17 @@ class Book
     }
 
     // G&S
-    public int getId()
+   public int getId()
     {
-        return id;
+       return id;
     }
 
-    public void setId(int id)
+   public void setId(int id)
     {
         this.id = id;
     }
 
-    public String getIsbn()
+   public String getIsbn()
     {
         return isbn;
     }
@@ -65,33 +65,29 @@ class Book
     // Checkout Methods
     public void checkOut(String name)
     {
-        if (!isCheckedOut)
-        {
+        if (!isCheckedOut) {
             isCheckedOut = true;
             checkedOutTo = name;
             System.out.println("This book is now checked out to " + name + ".");
+            System.out.println("---");
 
-        }
-
-        else
-        {
+        } else {
             System.out.println("This book is already checked out.");
+            System.out.println("---");
         }
     }
 
     // Check In Methods
     public void checkIn()
     {
-        if (isCheckedOut)
-        {
+        if (isCheckedOut) {
             isCheckedOut = false;
             checkedOutTo = "";
-            System.out.println("The book has been successfully checked in!");
-        }
-
-        else
-        {
+            System.out.println("The book has been successfully returned!");
+            System.out.println("---");
+        } else {
             System.out.println("This book is not currently checked out.");
+            System.out.println("---");
         }
     }
 
@@ -99,15 +95,11 @@ class Book
 
     public String toString()
     {
-        if (isCheckedOut)
-        {
-            return "Book ID: " + id + ", Title: " + title + ", ISBN: " + isbn + ", Checked Out: " + isCheckedOut +
+        if (isCheckedOut) {
+            return "ID: " + id + ", Title: " + title + ", ISBN: " + isbn + ", Checked Out: " + isCheckedOut +
                     ", Checked Out To: " + checkedOutTo;
-        }
-
-        else
-        {
-            return "Book ID: " + id + ", Title: " + title + ", ISBN: " + isbn + ", Checked Out: " + isCheckedOut;
+        } else {
+            return "ID: " + id + ", Title: " + title + ", ISBN: " + isbn + ", Checked Out: " + isCheckedOut;
         }
     }
 }

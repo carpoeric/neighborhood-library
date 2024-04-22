@@ -27,13 +27,13 @@ public class Main
                 maxLength = option.length();
             }
         }
-        int boxWidth = maxLength + 4; // Adding 4 for padding and borders
+        int boxWidth = maxLength + 4;
         String horizontalLine = "+" + "-".repeat(boxWidth) + "+";
 
         System.out.println(horizontalLine);
         for (String option : menuOptions)
         {
-            String paddedOption = "| " + option + " ".repeat(boxWidth - option.length() - 3) + "|";
+            String paddedOption = "| " + option + " ".repeat(boxWidth - option.length() - 3) + "  |";
             System.out.println(paddedOption);
         }
         System.out.println(horizontalLine);
@@ -51,10 +51,11 @@ public class Main
             // Print home
             System.out.println();
             System.out.println("Welcome to your Neighborhood Library!");
-            ;
+
             displayMainMenu();
-            System.out.println("Enter your command command here: ");
+            System.out.println("Please enter the number corresponding to the option here: ");
             choice = Integer.parseInt(userInput.nextLine());
+            System.out.println();
 
             switch (choice)
             {
@@ -103,34 +104,34 @@ public class Main
 
     public static void showAvailableBooks(Book[] books)
     {
-        System.out.println("Here's all the available books!");
-        for (int i = 0; i < bookCount; i++)
-        {
-            if (!books[i].isCheckedOut())
-            {
-                System.out.println("Book " + (i + 1) + ":");
-                System.out.println(books[i]);
-                System.out.println();
+        System.out.println("╔══════════════════════════════════════════════════════╗");
+        System.out.println("║             Here's all the available books!          ║");
+        System.out.println("╠══════╦═════════════════════════════════╦═════════════╣");
+        System.out.println("║  ID  ║              Title              ║    ISBN     ║");
+        System.out.println("╠══════╬═════════════════════════════════╬═════════════╣");
+        for (int i = 0; i < books.length; i++) {
+            if (!books[i].isCheckedOut()) {
+                System.out.printf("║ %-5s║ %-31s ║ %-11s ║\n", (i + 1), books[i].getTitle(), books[i].getIsbn());
             }
         }
-
-
-        System.out.println("Please enter the book number you would like to check out, or enter 0 to go back to the home screen: ");
+        System.out.println("╚══════╩═════════════════════════════════╩═════════════╝");
+        System.out.println("---");
+        System.out.println("Please enter the ID Number of the book you would like to check out, or enter 0 to go back to the home screen: ");
         int userChoice = Integer.parseInt(userInput.nextLine());
+        System.out.println("---");
 
         if (userChoice == 0)
         {
             System.out.println("Redirecting you back to the home page now...");
-            return;
         }
         else if (userChoice >= 1 && userChoice <= bookCount)
         {
             System.out.print("Enter your name: ");
             String userName = userInput.nextLine();
+            System.out.println("---");
 
             Book selectedBook = books[userChoice - 1];
             selectedBook.checkOut(userName);
-            System.out.println();
             System.out.println("Thank you for checking out \"" + selectedBook.getTitle() + "\"!");
             System.out.println("Redirecting you back to the home page now...");
         }
@@ -142,27 +143,33 @@ public class Main
 
     public static void showCheckedOutBooks(Book[] books)
     {
-        System.out.println("Here's all the checked out books:");
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                Here's all the books currently checked out:                  ║");
+        System.out.println("╠══════╦══════════════════════════════════════╦═════════════╦═════════════════╣");
+        System.out.println("║ Book ║              Title                   ║    ISBN     ║ Checked Out To: ║");
+        System.out.println("╠══════╬══════════════════════════════════════╬═════════════╬═════════════════╣");
         boolean hasCheckedOutBooks = false;
-        for (int i = 0; i < bookCount; i++)
-        {
-            if (books[i].isCheckedOut())
-            {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i].isCheckedOut()) {
                 hasCheckedOutBooks = true;
-                System.out.println("Book " + (i + 1) + ":");
-                System.out.println(books[i]);
-                System.out.println();
+                System.out.printf("║ %-5s║ %-31s ║ %-11s ║ %-10s ║\n", (i + 1), books[i].getTitle(), books[i].getIsbn(), books[i].getCheckedOutTo());
             }
         }
-
-        if (!hasCheckedOutBooks)
-        {
-            System.out.println("No books are currently checked out.");
+        if (!hasCheckedOutBooks) {
+            System.out.println("║                            No books checked out                             ║");
         }
+        System.out.println("╚══════╩══════════════════════════════════════════════════════════════════════╝");
 
 
-        System.out.println("Enter C to check in a book, or enter X to go back to the home screen: ");
+
+
+
+        System.out.println("What would you like to do? ");
+        System.out.println("C - Check in/Return a book.");
+        System.out.println("X - Go back to the home screen.");
+        System.out.println("Please enter the Letter corresponding to the option here: ");
         String userChoice = userInput.nextLine();
+        System.out.println("---");
 
         switch (userChoice.toUpperCase())
         {
@@ -181,12 +188,12 @@ public class Main
 
     public static void checkInBook()
     {
-        System.out.print("Enter the ID of the book you want to check in: ");
+        System.out.print("Please enter the ID of the book you want to check in: ");
         int bookId = Integer.parseInt(userInput.nextLine());
+        System.out.println("---");
 
         if (bookId >= 1 && bookId <= bookCount && books[bookId - 1].isCheckedOut()) {
             books[bookId - 1].checkIn();
-            System.out.println("The book was successfully checked in!");
             System.out.println("Redirecting you back to the home page now...");
         }
         else
