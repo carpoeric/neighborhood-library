@@ -80,12 +80,16 @@ class Book
     // Check In Methods
     public void checkIn()
     {
-        if (isCheckedOut) {
+        if (isCheckedOut)
+        {
             isCheckedOut = false;
             checkedOutTo = "";
             System.out.println("The book has been successfully returned!");
             System.out.println("---");
-        } else {
+        }
+
+        else
+        {
             System.out.println("This book is not currently checked out.");
             System.out.println("---");
         }
@@ -95,10 +99,15 @@ class Book
 
     public String toString()
     {
-        if (isCheckedOut) {
+        if (isCheckedOut)
+
+        {
             return "ID: " + id + ", Title: " + title + ", ISBN: " + isbn + ", Checked Out: " + isCheckedOut +
                     ", Checked Out To: " + checkedOutTo;
-        } else {
+        }
+
+        else
+        {
             return "ID: " + id + ", Title: " + title + ", ISBN: " + isbn + ", Checked Out: " + isCheckedOut;
         }
     }
